@@ -1,0 +1,64 @@
+<form id="myForm">
+    {% csrf_token %}
+    
+    {{ form.nome.label_tag }}
+    {{ form.nome }}
+    <br>
+    
+    {{ form.endereco.label_tag }}
+    {{ form.endereco }}
+    <br>
+    
+    {{ form.hamburguer.label_tag }}
+    {{ form.hamburguer }}
+    <br>
+    
+    {{ form.acai.label_tag }}
+    {{ form.acai }}
+    <br>
+    
+    {{ form.pizza.label_tag }}
+    {{ form.pizza }}
+    <br>
+    
+    {{ form.refrigerante.label_tag }}
+    {{ form.refrigerante }}
+    <br>
+    
+    {{ form.agua.label_tag }}
+    {{ form.agua }}
+    <br>
+    
+    {{ form.suco.label_tag }}
+    {{ form.suco }}
+    <br>
+
+    {{ form.formas_pagamento.label_tag }}
+    {{ form.formas_pagamento }}
+    <br>
+
+
+    <input type="submit" value="Enviar">
+</form>
+
+<div id="result"></div>
+
+<script>
+    document.getElementById("myForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const form = new FormData(this);
+
+        fetch("/telegram/api/", {
+            method: "POST",
+            body: form,
+        })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = JSON.stringify(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
