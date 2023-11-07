@@ -4,6 +4,6 @@ from telegram import api
 from . import views
 
 urlpatterns = [
-    path('api/', api.sample_api, name='sample_api'),
-    path('my_form/', views.my_form_view, name='my_form_view'),
+    path('api/', api.order_api, name='order_api'),
+    path('order/', views.order_view, name='order_view'),
 ]
